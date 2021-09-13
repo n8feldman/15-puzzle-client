@@ -2,6 +2,7 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 export const createPuzzle = (user, puzzleData) => {
+  console.log(puzzleData)
   return axios({
     method: 'POST',
     url: apiUrl + '/puzzles',
@@ -10,8 +11,8 @@ export const createPuzzle = (user, puzzleData) => {
     },
     data: {
       puzzle: {
-        title: puzzleData.title,
-        body: puzzleData.body
+        name: puzzleData.name,
+        difficulty: puzzleData.difficulty
       }
     }
   })
@@ -56,8 +57,8 @@ export const updatePuzzle = (user, puzzleId, puzzleData) => {
     },
     data: {
       puzzle: {
-        title: puzzleData.title,
-        body: puzzleData.body
+        name: puzzleData.name,
+        difficulty: puzzleData.difficulty
       }
     }
   })
