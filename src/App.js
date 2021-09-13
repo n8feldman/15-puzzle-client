@@ -10,6 +10,9 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
+import CreatePuzzle from './components/puzzle/CreatePuzzle'
+import UserPuzzles from './components/puzzle/UserPuzzles'
+import UpdatePuzzle from './components/puzzle/UpdatePuzzle'
 
 class App extends Component {
   constructor (props) {
@@ -44,8 +47,8 @@ class App extends Component {
 
     return (
       <Fragment>
-	      <Header user={user} />
-	      {msgAlerts.map((msgAlert) => (
+        <Header user={user} />
+        {msgAlerts.map((msgAlert) => (
           <AutoDismissAlert
             key={msgAlert.id}
             heading={msgAlert.heading}
@@ -55,8 +58,8 @@ class App extends Component {
             deleteAlert={this.deleteAlert}
           />
         ))}
-	      <main className='container'>
-	        <Route
+        <main className='container'>
+          <Route
             path='/sign-up'
             render={() => (
               <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
@@ -85,6 +88,22 @@ class App extends Component {
             render={() => (
               <ChangePassword msgAlert={this.msgAlert} user={user} />
             )}
+          />
+          <AuthenticatedRoute
+            user={user}
+            path='/create-puzzle'
+            render={() => <CreatePuzzle msgAlert={this.msgAlert} user={user} />}
+          />
+          <AuthenticatedRoute
+            user={user}
+            exact
+            path='/puzzles'
+            render={() => <UserPuzzles msgAlert={this.msgAlert} user={user} />}
+          />
+          <AuthenticatedRoute
+            user={user}
+            path='/puzzles/:id/update'
+            render={() => <UpdatePuzzle msgAlert={this.msgAlert} user={user} />}
           />
         </main>
       </Fragment>
